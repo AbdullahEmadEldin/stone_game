@@ -49,6 +49,96 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `Start play`
+  String get startPaly {
+    return Intl.message(
+      'Start play',
+      name: 'startPaly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Play History`
+  String get playHistory {
+    return Intl.message(
+      'Play History',
+      name: 'playHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get Settings {
+    return Intl.message(
+      'Settings',
+      name: 'Settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Help`
+  String get help {
+    return Intl.message(
+      'Help',
+      name: 'help',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out`
+  String get logOut {
+    return Intl.message(
+      'Log out',
+      name: 'logOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App Theme`
+  String get appTheme {
+    return Intl.message(
+      'App Theme',
+      name: 'appTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get English {
+    return Intl.message(
+      'English',
+      name: 'English',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Arabic`
+  String get Arabic {
+    return Intl.message(
+      'Arabic',
+      name: 'Arabic',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

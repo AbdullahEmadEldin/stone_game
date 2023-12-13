@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:stone_game/core/localization/generated/l10n.dart';
+import 'package:stone_game/core/localization/localization_manager.dart';
+import 'package:stone_game/core/locator.dart';
+import 'package:stone_game/core/navigation/router.dart';
 import 'package:stone_game/core/theme/app_theme.dart';
 import 'package:stone_game/core/theme/theme_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:stone_game/generated/l10n.dart';
 
 void main() {
+  setUp();
   runApp(const StoneGameApp());
 }
-
-ThemeManager _themeManager = ThemeManager();
 
 class StoneGameApp extends StatefulWidget {
   const StoneGameApp({super.key});
@@ -22,13 +24,15 @@ class _StoneGameAppState extends State<StoneGameApp> {
 
   ///these listners for switching theme
   void dispose() {
-    _themeManager.removeListener(themeListener);
+    locator.get<ThemeManager>().removeListener(themeListener);
+    locator.get<LocalizationManager>().removeListener(languageLisnter);
     super.dispose();
   }
 
   @override
   void initState() {
-    _themeManager.addListener(themeListener);
+    locator.get<ThemeManager>().addListener(themeListener);
+    locator.get<LocalizationManager>().addListener(languageLisnter);
     super.initState();
   }
 
@@ -38,14 +42,21 @@ class _StoneGameAppState extends State<StoneGameApp> {
     }
   }
 
+  languageLisnter() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      locale: Locale('en'),
+      routerConfig: AppRouter.router(),
+      locale: locator.get<LocalizationManager>().appLanguage,
       debugShowCheckedModeBanner: false,
-      theme: AppThemes.lightAppTheme,
+      theme: locator.get<ThemeData>(),
       darkTheme: AppThemes.darkAppTheme,
-      themeMode: _themeManager.themeMode,
+      themeMode: locator.get<ThemeManager>().themeMode,
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
