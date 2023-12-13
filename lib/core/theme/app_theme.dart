@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stone_game/core/theme/text.theme.dart';
 
 final kLightColorScheme =
-    ColorScheme.fromSeed(seedColor: const Color(0xff18604A));
+    ColorScheme.fromSeed(seedColor: const Color(0xff00C8C8));
 final kDarkColorScheme = ColorScheme.fromSeed(
     seedColor: const Color(0xff18604A), brightness: Brightness.dark);
 
@@ -38,7 +38,7 @@ class AppThemes {
           backgroundColor: kLightColorScheme.primary,
           foregroundColor: Colors.white,
           elevation: 6,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(3)))),
     ),
     textTheme: AppTextThemes.lightTextTheme,
@@ -50,7 +50,14 @@ class AppThemes {
     ),
     iconTheme: IconThemeData(color: kLightColorScheme.primary),
     primaryIconTheme: IconThemeData(color: kLightColorScheme.primary),
-    drawerTheme: DrawerThemeData(),
+    dialogTheme: DialogTheme(
+      backgroundColor: kLightColorScheme.primary,
+      shape: const BeveledRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(5),
+        ),
+      ),
+    ),
   );
 
 // 4
