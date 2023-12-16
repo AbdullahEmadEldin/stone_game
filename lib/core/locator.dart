@@ -8,6 +8,7 @@ final locator = GetIt.instance;
 ThemeData _appTheme = AppThemes.lightAppTheme;
 LocalizationManager _appLanguage = LocalizationManager();
 ThemeManager _themeManager = ThemeManager();
+
 void setUp() {
   locator.registerSingleton<ThemeData>(_appTheme);
   locator.registerLazySingleton<ThemeManager>(() => _themeManager);

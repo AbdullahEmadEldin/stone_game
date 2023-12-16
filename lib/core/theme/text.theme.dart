@@ -7,7 +7,7 @@ class AppTextThemes {
       fontFamily: 'Cairo-VariableFont_slnt,wght',
       fontSize: 14.0,
       fontWeight: FontWeight.w700,
-      color: kLightColorScheme.onPrimary,
+      color: kLightColorScheme.onPrimaryContainer,
     ),
     bodyMedium: TextStyle(
       fontFamily: 'Cairo-VariableFont_slnt,wght',
