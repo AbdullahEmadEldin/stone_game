@@ -5,7 +5,7 @@ final List<String> resultsOptions = ['draw', 'computer wins', 'player wins'];
 
 abstract class GameLogicAPI {
   Future<String> randomComputerChoice(List<String> computerChoices);
-  Future<String> gameResult({required String playerChoice});
+  String gameResult({required String playerChoice, required String compChoice});
 }
 
 class GameLogic implements GameLogicAPI {
@@ -21,9 +21,8 @@ class GameLogic implements GameLogicAPI {
   }
 
   @override
-  Future<String> gameResult({required String playerChoice}) async {
-    final String compChoice = await randomComputerChoice(gameChoices);
-    print('LOGIC inside::::::::::::: $compChoice');
+  String gameResult(
+      {required String playerChoice, required String compChoice}) {
     String result = '';
     if (compChoice == playerChoice) {
       result = resultsOptions[0];

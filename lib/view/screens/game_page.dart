@@ -1,6 +1,12 @@
+// ignore_for_file: unnecessary_brace_in_string_interps, avoid_print
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stone_game/core/app_assets.dart';
 import 'package:stone_game/generated/l10n.dart';
+import 'package:stone_game/logic/game_cubit/cubit/game_logic_cubit.dart';
+import 'package:stone_game/service/game_logic.dart';
+import 'package:stone_game/view/widgets/computer_card.dart';
 import 'package:stone_game/view/widgets/play_card.dart';
 import 'package:stone_game/view/widgets/side_menu.dart';
 
@@ -17,44 +23,94 @@ class GamePage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildCardRow(textUp: true),
-          _buildCardRow(textUp: false),
+          BlocBuilder<GameLogicCubit, GameLogicState>(
+            buildWhen: (previous, current) => previous != current,
+            builder: (context, state) {
+              if (state is ResultCalculatedSuccessfully) {
+                print('in bloc builder::: ${state.compChoice}');
+                return _buildComputerCardRow(state.compChoice);
+              } else {
+                return _buildComputerCardRow('computerChoice');
+              }
+            },
+          ),
+          _buildPlayerCardRow(context),
         ],
       ),
     );
   }
 
-  Widget _buildCardRow({required bool textUp}) {
+  Widget _buildPlayerCardRow(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        PlayCard(
-          cardName: 'Sissor',
+        PlayerCard(
+          cardName: gameChoices[0],
           imageAsset: AppAssets.sissor,
-          textUp: textUp,
+          invokeLoic: () {
+            BlocProvider.of<GameLogicCubit>(context)
+                .getGameResult(gameChoices[0]);
+          },
           tweenOffset: Tween<Offset>(
             begin: const Offset(0, 0),
-            end: textUp ? const Offset(1, 1.5) : const Offset(1, -1.5),
+            end: const Offset(1, -1.5),
           ),
         ),
-        PlayCard(
-          cardName: 'Paper',
+        PlayerCard(
+          cardName: gameChoices[1],
           imageAsset: AppAssets.paper,
-          textUp: textUp,
+          invokeLoic: () {
+            BlocProvider.of<GameLogicCubit>(context)
+                .getGameResult(gameChoices[1]);
+          },
           tweenOffset: Tween<Offset>(
             begin: const Offset(0, 0),
-            end: textUp ? const Offset(0, 1.5) : const Offset(0, -1.5),
+            end: const Offset(0, -1.5),
           ),
         ),
-        PlayCard(
-          cardName: 'Rock',
+        PlayerCard(
+          cardName: gameChoices[2],
           imageAsset: AppAssets.rock,
-          textUp: textUp,
+          invokeLoic: () {
+            BlocProvider.of<GameLogicCubit>(context)
+                .getGameResult(gameChoices[2]);
+          },
           tweenOffset: Tween<Offset>(
             begin: const Offset(0, 0),
-            end: textUp ? const Offset(-1, 1.5) : const Offset(-1, -1.5),
+            end: const Offset(-1, -1.5),
           ),
         ),
+      ],
+    );
+  }
+
+  Widget _buildComputerCardRow(String computerChoice) {
+    return Row(
+      children: [
+        ComputerCard(
+            cardName: gameChoices[0],
+            imageAsset: AppAssets.sissor,
+            tweenOffset: Tween<Offset>(
+              begin: const Offset(0, 0),
+              end: const Offset(1, 1.5),
+            ),
+            computerChoice: computerChoice),
+        ComputerCard(
+            cardName: gameChoices[1],
+            imageAsset: AppAssets.paper,
+            tweenOffset: Tween<Offset>(
+              begin: const Offset(0, 0),
+              end: const Offset(0, 1.5),
+            ),
+            computerChoice: computerChoice),
+        ComputerCard(
+            cardName: gameChoices[2],
+            imageAsset: AppAssets.rock,
+            tweenOffset: Tween<Offset>(
+              begin: const Offset(0, 0),
+              end: const Offset(-1, 1.5),
+            ),
+            computerChoice: computerChoice),
       ],
     );
   }

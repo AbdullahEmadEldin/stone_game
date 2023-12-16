@@ -7,8 +7,9 @@ final class GameLogicInitial extends GameLogicState {}
 
 final class ResultCalculatedSuccessfully extends GameLogicState {
   final String result;
-
-  ResultCalculatedSuccessfully({required this.result});
+  final String compChoice;
+  ResultCalculatedSuccessfully(
+      {required this.compChoice, required this.result});
 }
 
 final class Error extends GameLogicState {

@@ -10,9 +10,14 @@ class GameLogicCubit extends Cubit<GameLogicState> {
 
   void getGameResult(String playerChoice) async {
     try {
-      await gameLogicAPI
-          .gameResult(playerChoice: playerChoice)
-          .then((result) => emit(ResultCalculatedSuccessfully(result: result)));
+      final String compChoice =
+          await gameLogicAPI.randomComputerChoice(gameChoices);
+      final String result = gameLogicAPI.gameResult(
+          playerChoice: playerChoice, compChoice: compChoice);
+      emit(
+          ResultCalculatedSuccessfully(result: result, compChoice: compChoice));
+      print(
+          '==comp ==$compChoice=======================player=$playerChoice=====$result');
     } catch (error) {
       print('SOme fucking error on game logic result:::: ${error.toString}');
       emit(Error(errorMsg: error.toString()));
