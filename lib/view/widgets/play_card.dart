@@ -1,25 +1,27 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:stone_game/core/locator.dart';
+import 'package:stone_game/service/game_logic.dart';
 
-class PlayCard extends StatefulWidget {
+class PlayerCard extends StatefulWidget {
   final String imageAsset;
   final String cardName;
-  final bool textUp;
   final Tween<Offset> tweenOffset;
-  const PlayCard(
-      {Key? key,
-      required this.cardName,
-      required this.imageAsset,
-      required this.textUp,
-      required this.tweenOffset})
-      : super(key: key);
+  final Function invokeLoic;
+  const PlayerCard({
+    Key? key,
+    required this.cardName,
+    required this.imageAsset,
+    required this.tweenOffset,
+    required this.invokeLoic,
+  }) : super(key: key);
 
   @override
-  State<PlayCard> createState() => _PlayCardState();
+  State<PlayerCard> createState() => _PlayerCardState();
 }
 
-class _PlayCardState extends State<PlayCard>
+class _PlayerCardState extends State<PlayerCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _animation;
@@ -44,12 +46,8 @@ class _PlayCardState extends State<PlayCard>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          if (_controller.isCompleted) {
-            _controller.reverse();
-          } else {
-            _controller.forward();
-          }
+        onTap: () async {
+          _buildPlayerAnimationLogic(widget.invokeLoic);
         },
         child: SlideTransition(
             position: _animation, child: _buildPlayCard(context)));
@@ -59,23 +57,24 @@ class _PlayCardState extends State<PlayCard>
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        widget.textUp
-            ? Text(
-                widget.cardName,
-                style: Theme.of(context).textTheme.bodyLarge,
-              )
-            : const SizedBox(),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.15,
           child: Image.asset(widget.imageAsset),
         ),
-        widget.textUp
-            ? const SizedBox()
-            : Text(
-                widget.cardName,
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
+        Text(
+          widget.cardName,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
       ],
     );
+  }
+
+  _buildPlayerAnimationLogic(Function invokeLogic) async {
+    if (_controller.isCompleted) {
+      _controller.reverse();
+    } else {
+      _controller.forward();
+    }
+    invokeLogic();
   }
 }
