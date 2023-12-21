@@ -103,24 +103,3 @@ class SettingsScreen extends StatelessWidget {
         });
   }
 }
-
-//  Padding(
-//                 padding: const EdgeInsets.all(8.0),
-//                 child: TextButton(
-//                   onPressed: () {
-//                     locator.unregister<Locale>();
-//                     if (index == 0) {
-//                       locator.registerLazySingleton<Locale>(
-//                           () => const Locale('en'));
-//                     }
-//                     if (index == 1) {
-//                       locator.registerLazySingleton<Locale>(
-//                           () => const Locale('ar'));
-//                     }
-//                   },
-//                   child: Text(
-//                     languages[index],
-//                     style: Theme.of(context).textTheme.bodyLarge,
-//                   ),
-//                 ),
-//               ),

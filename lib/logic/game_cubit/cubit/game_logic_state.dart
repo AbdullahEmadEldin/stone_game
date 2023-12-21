@@ -7,7 +7,7 @@ final class GameLogicInitial extends GameLogicState {}
 
 final class ResultCalculatedSuccessfully extends GameLogicState {
   final String result;
-  final String compChoice;
+  String compChoice;
   ResultCalculatedSuccessfully(
       {required this.compChoice, required this.result});
 }

@@ -51,12 +51,9 @@ class AppThemes {
     iconTheme: IconThemeData(color: kLightColorScheme.primary),
     primaryIconTheme: IconThemeData(color: kLightColorScheme.primary),
     dialogTheme: DialogTheme(
-      backgroundColor: kLightColorScheme.primary,
-      shape: const BeveledRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(5),
-        ),
-      ),
+      backgroundColor: kLightColorScheme.primaryContainer,
+      shape: const ContinuousRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8))),
     ),
   );
 

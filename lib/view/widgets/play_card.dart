@@ -1,20 +1,22 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:stone_game/core/locator.dart';
-import 'package:stone_game/service/game_logic.dart';
 
 class PlayerCard extends StatefulWidget {
   final String imageAsset;
   final String cardName;
   final Tween<Offset> tweenOffset;
   final Function invokeLoic;
+  final bool isDisabled;
+  final bool reset;
   const PlayerCard({
     Key? key,
     required this.cardName,
     required this.imageAsset,
     required this.tweenOffset,
     required this.invokeLoic,
+    required this.isDisabled,
+    required this.reset,
   }) : super(key: key);
 
   @override
@@ -29,11 +31,11 @@ class _PlayerCardState extends State<PlayerCard>
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(
       duration: Duration(seconds: 1),
       vsync: this,
     );
-
     _animation = widget.tweenOffset.animate(_controller);
   }
 
@@ -44,11 +46,21 @@ class _PlayerCardState extends State<PlayerCard>
   }
 
   @override
+  void didUpdateWidget(covariant PlayerCard oldWidget) {
+    if (widget.reset != oldWidget.reset) {
+      _controller.reset();
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () async {
-          _buildPlayerAnimationLogic(widget.invokeLoic);
-        },
+        onTap: widget.isDisabled
+            ? null
+            : () async {
+                _buildPlayerAnimationLogic(widget.invokeLoic);
+              },
         child: SlideTransition(
             position: _animation, child: _buildPlayCard(context)));
   }

@@ -18,8 +18,10 @@ class SideMenu extends StatelessWidget {
           children: [
             _buildInfoHeader(context, size),
             OptionTile(
-                leadingIcon: Icons.history,
-                title: Text(S.of(context).playHistory)),
+              leadingIcon: Icons.history,
+              title: Text(S.of(context).playHistory),
+              onTap: () => context.goNamed(AppRoutes.historyScreen),
+            ),
             _buildDivider(),
             OptionTile(
               leadingIcon: Icons.settings,

@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 
 class ComputerCard extends StatefulWidget {
@@ -7,12 +5,14 @@ class ComputerCard extends StatefulWidget {
   final String cardName;
   final String computerChoice;
   final Tween<Offset> tweenOffset;
+  final bool reset;
   const ComputerCard({
     Key? key,
     required this.cardName,
     required this.imageAsset,
     required this.tweenOffset,
     required this.computerChoice,
+    required this.reset,
   }) : super(key: key);
 
   @override
@@ -32,8 +32,6 @@ class _ComputerCardState extends State<ComputerCard>
     );
     _animation = widget.tweenOffset.animate(_controller);
 
-    print(
-        '=from INIT state=====${widget.computerChoice}================================${widget.cardName == widget.computerChoice}');
     super.initState();
   }
 
@@ -46,9 +44,9 @@ class _ComputerCardState extends State<ComputerCard>
         _controller.forward();
       }
     }
-
-    print(
-        '=from didUpdateWidget=====${widget.computerChoice}================================${widget.cardName == widget.computerChoice}');
+    if (widget.reset != oldCard.reset) {
+      _controller.reset();
+    }
   }
 
   @override

@@ -13,7 +13,7 @@ class GameLogic implements GameLogicAPI {
   @override
   Future<String> randomComputerChoice(List<String> computerChoices) async {
     final random = Random();
-    final stringResult = await Future.delayed(const Duration(seconds: 3), () {
+    final stringResult = await Future.delayed(const Duration(seconds: 2), () {
       var element = computerChoices[random.nextInt(computerChoices.length)];
       return element;
     });
