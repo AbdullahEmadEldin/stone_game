@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stone_game/core/app_assets.dart';
+import 'package:stone_game/core/locator.dart';
 import 'package:stone_game/generated/l10n.dart';
+import 'package:stone_game/logic/database_cubit/cubit/history_db_cubit.dart';
 import 'package:stone_game/logic/game_cubit/cubit/game_logic_cubit.dart';
 import 'package:stone_game/service/game_logic.dart';
 import 'package:stone_game/view/widgets/computer_card.dart';
@@ -20,6 +22,7 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   String? _gameResult;
+  DateTime? date;
   String _computerChoice = '';
   bool reset = false;
 
@@ -74,6 +77,7 @@ class _GamePageState extends State<GamePage> {
           BlocBuilder<GameLogicCubit, GameLogicState>(
             builder: (context, state) {
               if (state is ResultCalculatedSuccessfully) {
+                date = DateTime.now();
                 _gameResult = state.result;
 
                 _computerChoice = state.compChoice;
@@ -180,7 +184,7 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
-  //? we gave Bilder to showDialog because it's a (overlay widget) type and it's a child of the screen
+  //? we wrapped showDialog with a builder because it's a (overlay widget) type and it's a child of the screen
 //? and without the builder the parent and the child are being built in the same time wich is exception
   Builder _showGameResult() {
     return Builder(builder: (context) {
@@ -205,8 +209,11 @@ class _GamePageState extends State<GamePage> {
                         actions: [
                           TextButton(
                               onPressed: () {
+                                BlocProvider.of<HistoryDbCubit>(context).recordGame(
+                                    date:
+                                        '${date!.day}-${date!.month}-${date!.year}',
+                                    gameResult: _gameResult!);
                                 resetGame();
-
                                 context.pop();
                               },
                               child: Text('Reset'))
