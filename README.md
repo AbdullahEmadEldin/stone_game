@@ -1,16 +1,10 @@
-# stone_game
+# Rock Paper Sissor game
+this simple game built completely with flutter depending og flutter animation 
+General App Features:
+  - Support light and dark theme
+  - Support English and Arabic languages
+Technical features:
+  - App navigation: Navigator 2.0 API using GoRouter package
+  - State management: BLoC state management
+  - Local storage: SQL using sqflite package
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
