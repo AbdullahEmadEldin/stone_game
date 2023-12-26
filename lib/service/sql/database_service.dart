@@ -34,13 +34,17 @@ class PlayHistoryDB {
   _onCreate(Database db, int version) async {
     /// we added ''' at firsr and end of the sql order to enable multilines writing for sql code
     ///execute method takes Sql code (has it's own syntax)
-    await db.execute('''
+
+    Batch dbBatch = db.batch();
+    dbBatch.execute('''
       CREATE TABLE "history"(
         "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         "date" TEXT NOT NULL,
         "result" TEXT NOT NULL
       )
 ''');
+
+    await dbBatch.commit();
     print('_oncreate function called to created data base table===========');
   }
 
@@ -82,5 +86,12 @@ class PlayHistoryDB {
     Database? mydb = await db;
     int response = await mydb!.rawDelete(sql);
     return response;
+  }
+
+  ///Delete the whole data base
+  deleteCompleteDatabase() async {
+    String path = await getDatabasesPath();
+    String dbPath = join(path, 'games_history.db');
+    await deleteDatabase(dbPath);
   }
 }

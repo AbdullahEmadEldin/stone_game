@@ -27,7 +27,7 @@ class _ComputerCardState extends State<ComputerCard>
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 2),
       vsync: this,
     );
     _animation = widget.tweenOffset.animate(_controller);
@@ -41,7 +41,7 @@ class _ComputerCardState extends State<ComputerCard>
 
     if (widget.computerChoice != oldCard.computerChoice) {
       if (widget.cardName == widget.computerChoice) {
-        _controller.forward();
+        _controller.animateTo(1.0, curve: Curves.bounceInOut);
       }
     }
     if (widget.reset != oldCard.reset) {
@@ -58,7 +58,9 @@ class _ComputerCardState extends State<ComputerCard>
   @override
   Widget build(BuildContext context) {
     return SlideTransition(
-        position: _animation, child: _buildPlayCard(context));
+      position: _animation,
+      child: _buildPlayCard(context),
+    );
   }
 
   Column _buildPlayCard(BuildContext context) {
@@ -69,7 +71,8 @@ class _ComputerCardState extends State<ComputerCard>
           widget.cardName,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
-        SizedBox(
+        Container(
+          color: Colors.white,
           height: MediaQuery.of(context).size.height * 0.15,
           child: Image.asset(widget.imageAsset),
         ),

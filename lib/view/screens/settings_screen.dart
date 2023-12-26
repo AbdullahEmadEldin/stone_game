@@ -4,11 +4,12 @@ import 'package:stone_game/core/localization/localization_manager.dart';
 import 'package:stone_game/core/locator.dart';
 import 'package:stone_game/core/theme/theme_manager.dart';
 import 'package:stone_game/generated/l10n.dart';
+import 'package:stone_game/service/sql/database_service.dart';
 import 'package:stone_game/view/widgets/option_tile.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
-
+  SettingsScreen({Key? key}) : super(key: key);
+  PlayHistoryDB playHistoryDB = PlayHistoryDB();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,12 +79,14 @@ class SettingsScreen extends StatelessWidget {
                             locator
                                 .get<LocalizationManager>()
                                 .changeLanguage('en');
+
                             context.pop();
                           }
                           if (language == S.of(context).Arabic) {
                             locator
                                 .get<LocalizationManager>()
                                 .changeLanguage('ar');
+
                             context.pop();
                           }
                         },

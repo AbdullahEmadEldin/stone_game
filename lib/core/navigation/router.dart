@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:stone_game/core/locator.dart';
 import 'package:stone_game/core/navigation/routes.dart';
 import 'package:stone_game/logic/database_cubit/cubit/history_db_cubit.dart';
 import 'package:stone_game/logic/game_cubit/cubit/game_logic_cubit.dart';
@@ -14,7 +13,7 @@ import 'package:stone_game/view/screens/splash_screen.dart';
 class AppRouter {
   static GoRouter router() {
     return GoRouter(
-      initialLocation: '/gamePage',
+      initialLocation: '/splashScreen',
       routes: [
         GoRoute(
           name: AppRoutes.splash,
@@ -46,7 +45,9 @@ class AppRouter {
                 name: AppRoutes.settingsScreen,
                 path: 'settings',
                 pageBuilder: (context, state) {
-                  return const MaterialPage(child: SettingsScreen());
+                  return MaterialPage(
+                    child: SettingsScreen(),
+                  );
                 },
               ),
               GoRoute(

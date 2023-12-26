@@ -15,7 +15,6 @@ class HistoryDbCubit extends Cubit<HistoryDbState> {
     try {
       await playHistoryDB.createData(
           "INSERT INTO history ('date','result') VALUES ('$date','$gameResult')");
-      print('game record successssssssss:: $date,,,,, $gameResult');
     } catch (error) {
       print('History cuuuuuuuuuuuuubit errorr:: ${error.toString}');
     }
@@ -23,13 +22,11 @@ class HistoryDbCubit extends Cubit<HistoryDbState> {
 
   void getGameRecords() async {
     emit(LoadingHistory());
-    print('1111111111   getGameRecordssssssssssssssssssss inside cubit');
     try {
       List<GameRecord> gameRecords = await _fetchRecords();
-      print('3333333333   getGameRecordssssssssssssssssssss inside cubit:');
       emit(SuccessfulGameRecords(gameRecords: gameRecords));
     } catch (error) {
-      print('History cuuuuuuuuuuuuubit:: ${error.toString}');
+      print('erorrrr in get game recordsss cubit');
     }
   }
 
@@ -45,7 +42,6 @@ class HistoryDbCubit extends Cubit<HistoryDbState> {
           (record) => GameRecord.fromJson(record),
         )
         .toList();
-    print('2222222222   getGameRecordssssssssssssssssssss inside cubit:');
     return gameRecords;
   }
 }

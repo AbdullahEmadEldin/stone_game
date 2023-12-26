@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:stone_game/core/locator.dart';
 import 'package:stone_game/core/navigation/routes.dart';
 import 'package:stone_game/core/theme/app_theme.dart';
+import 'package:stone_game/core/theme/theme_manager.dart';
 import 'package:stone_game/view/widgets/option_tile.dart';
 import 'package:stone_game/generated/l10n.dart';
 
@@ -32,11 +33,6 @@ class SideMenu extends StatelessWidget {
             OptionTile(
                 leadingIcon: Icons.help, title: Text(S.of(context).help)),
             _buildDivider(),
-            OptionTile(
-              leadingIcon: Icons.logout_rounded,
-              iconColor: Colors.red,
-              title: Text(S.of(context).logOut),
-            ),
           ],
         ),
       ),
@@ -45,9 +41,9 @@ class SideMenu extends StatelessWidget {
 
   Widget _buildInfoHeader(BuildContext context, Size size) {
     return Container(
-      color: locator.get<ThemeData>() == AppThemes.lightAppTheme
+      color: locator.get<ThemeManager>().themeMode == AppThemes.lightAppTheme
           ? kLightColorScheme.primary
-          : Colors.red,
+          : kDarkColorScheme.primaryContainer,
       padding: EdgeInsets.zero,
       height: size.height * 0.23,
       width: double.infinity,
@@ -66,12 +62,7 @@ class SideMenu extends StatelessWidget {
               ),
             ),
             Text(
-              //TODO: store user name and profile image locally related to user.uid of firebase object
-              'Abdullah Emad',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            Text(
-              '010082233760',
+              'Demo Profile',
               style: Theme.of(context).textTheme.bodyLarge,
             ),
           ],

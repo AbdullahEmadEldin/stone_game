@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stone_game/core/app_assets.dart';
-import 'package:stone_game/core/locator.dart';
 import 'package:stone_game/generated/l10n.dart';
 import 'package:stone_game/logic/database_cubit/cubit/history_db_cubit.dart';
 import 'package:stone_game/logic/game_cubit/cubit/game_logic_cubit.dart';
@@ -14,7 +13,7 @@ import 'package:stone_game/view/widgets/play_card.dart';
 import 'package:stone_game/view/widgets/side_menu.dart';
 
 class GamePage extends StatefulWidget {
-  GamePage({super.key});
+  const GamePage({super.key});
 
   @override
   State<GamePage> createState() => _GamePageState();
@@ -69,7 +68,11 @@ class _GamePageState extends State<GamePage> {
     return Scaffold(
       drawer: const SideMenu(),
       appBar: AppBar(
-        title: Text(S.of(context).startPaly),
+        title: Text(
+          S.of(context).startPaly,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        centerTitle: true,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,8 +84,7 @@ class _GamePageState extends State<GamePage> {
                 _gameResult = state.result;
 
                 _computerChoice = state.compChoice;
-                print(
-                    'in bloc builder::: compChoice ${_computerChoice}---------------$_gameResult');
+
                 return _buildComputerCardRow();
               } else {
                 return _buildComputerCardRow();
@@ -97,90 +99,96 @@ class _GamePageState extends State<GamePage> {
   }
 
   Widget _buildPlayerCardRow(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        PlayerCard(
-          cardName: gameChoices[0],
-          imageAsset: AppAssets.sissor,
-          isDisabled: isDisabled1,
-          reset: reset,
-          invokeLoic: () {
-            handleTap(0);
-            BlocProvider.of<GameLogicCubit>(context)
-                .getGameResult(gameChoices[0]);
-          },
-          tweenOffset: Tween<Offset>(
-            begin: const Offset(0, 0),
-            end: const Offset(1, -1.5),
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          PlayerCard(
+            cardName: gameChoices[0],
+            imageAsset: AppAssets.sissor,
+            isDisabled: isDisabled1,
+            reset: reset,
+            invokeLoic: () {
+              handleTap(0);
+              BlocProvider.of<GameLogicCubit>(context)
+                  .getGameResult(gameChoices[0]);
+            },
+            tweenOffset: Tween<Offset>(
+              begin: const Offset(0, 0),
+              end: const Offset(1, -1.5),
+            ),
           ),
-        ),
-        PlayerCard(
-          cardName: gameChoices[1],
-          imageAsset: AppAssets.paper,
-          isDisabled: isDisabled2,
-          reset: reset,
-          invokeLoic: () {
-            handleTap(1);
-            BlocProvider.of<GameLogicCubit>(context)
-                .getGameResult(gameChoices[1]);
-          },
-          tweenOffset: Tween<Offset>(
-            begin: const Offset(0, 0),
-            end: const Offset(0, -1.5),
+          PlayerCard(
+            cardName: gameChoices[1],
+            imageAsset: AppAssets.paper,
+            isDisabled: isDisabled2,
+            reset: reset,
+            invokeLoic: () {
+              handleTap(1);
+              BlocProvider.of<GameLogicCubit>(context)
+                  .getGameResult(gameChoices[1]);
+            },
+            tweenOffset: Tween<Offset>(
+              begin: const Offset(0, 0),
+              end: const Offset(0, -1.5),
+            ),
           ),
-        ),
-        PlayerCard(
-          cardName: gameChoices[2],
-          imageAsset: AppAssets.rock,
-          isDisabled: isDisabled3,
-          reset: reset,
-          invokeLoic: () {
-            handleTap(2);
-            BlocProvider.of<GameLogicCubit>(context)
-                .getGameResult(gameChoices[2]);
-          },
-          tweenOffset: Tween<Offset>(
-            begin: const Offset(0, 0),
-            end: const Offset(-1, -1.5),
+          PlayerCard(
+            cardName: gameChoices[2],
+            imageAsset: AppAssets.rock,
+            isDisabled: isDisabled3,
+            reset: reset,
+            invokeLoic: () {
+              handleTap(2);
+              BlocProvider.of<GameLogicCubit>(context)
+                  .getGameResult(gameChoices[2]);
+            },
+            tweenOffset: Tween<Offset>(
+              begin: const Offset(0, 0),
+              end: const Offset(-1, -1.5),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget _buildComputerCardRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ComputerCard(
-            cardName: gameChoices[0],
-            imageAsset: AppAssets.sissor,
-            reset: reset,
-            tweenOffset: Tween<Offset>(
-              begin: const Offset(0, 0),
-              end: const Offset(1, 1.5),
-            ),
-            computerChoice: _computerChoice),
-        ComputerCard(
-            cardName: gameChoices[1],
-            imageAsset: AppAssets.paper,
-            reset: reset,
-            tweenOffset: Tween<Offset>(
-              begin: const Offset(0, 0),
-              end: const Offset(0, 1.5),
-            ),
-            computerChoice: _computerChoice),
-        ComputerCard(
-            cardName: gameChoices[2],
-            imageAsset: AppAssets.rock,
-            reset: reset,
-            tweenOffset: Tween<Offset>(
-              begin: const Offset(0, 0),
-              end: const Offset(-1, 1.5),
-            ),
-            computerChoice: _computerChoice),
-      ],
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          ComputerCard(
+              cardName: gameChoices[0],
+              imageAsset: AppAssets.sissor,
+              reset: reset,
+              tweenOffset: Tween<Offset>(
+                begin: const Offset(0, 0),
+                end: const Offset(1, 1.5),
+              ),
+              computerChoice: _computerChoice),
+          ComputerCard(
+              cardName: gameChoices[1],
+              imageAsset: AppAssets.paper,
+              reset: reset,
+              tweenOffset: Tween<Offset>(
+                begin: const Offset(0, 0),
+                end: const Offset(0, 1.5),
+              ),
+              computerChoice: _computerChoice),
+          ComputerCard(
+              cardName: gameChoices[2],
+              imageAsset: AppAssets.rock,
+              reset: reset,
+              tweenOffset: Tween<Offset>(
+                begin: const Offset(0, 0),
+                end: const Offset(-1, 1.5),
+              ),
+              computerChoice: _computerChoice),
+        ],
+      ),
     );
   }
 
@@ -191,8 +199,9 @@ class _GamePageState extends State<GamePage> {
       return BlocListener<GameLogicCubit, GameLogicState>(
         listener: (context, state) {
           if (state is ResultCalculatedSuccessfully) {
-            Future.delayed(const Duration(milliseconds: 1500), () {
+            Future.delayed(const Duration(seconds: 2), () {
               showDialog(
+                  useRootNavigator: false,
                   context: context,
                   builder: (_) => AlertDialog(
                         content: SizedBox(
@@ -216,7 +225,7 @@ class _GamePageState extends State<GamePage> {
                                 resetGame();
                                 context.pop();
                               },
-                              child: Text('Reset'))
+                              child: Text(S.of(context).Reset))
                         ],
                       ));
             });

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stone_game/generated/l10n.dart';
 import 'package:stone_game/logic/database_cubit/cubit/history_db_cubit.dart';
 import 'package:stone_game/view/widgets/gamerecord_tile.dart';
 
@@ -11,7 +12,7 @@ class HistoryScreen extends StatelessWidget {
     BlocProvider.of<HistoryDbCubit>(context).getGameRecords();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Games History'),
+        title: Text(S.of(context).playHistory),
         centerTitle: true,
         actions: [
           IconButton(
@@ -36,7 +37,7 @@ class HistoryScreen extends StatelessWidget {
               if (records.isEmpty) {
                 return SizedBox(
                     height: MediaQuery.of(context).size.height,
-                    child: const Center(child: Text('No Game Records')));
+                    child: Center(child: Text(S.of(context).noGameRecords)));
               }
               return ListView.builder(
                   shrinkWrap: true,

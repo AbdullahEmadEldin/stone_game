@@ -139,6 +139,56 @@ class S {
       args: [],
     );
   }
+
+  /// `No Play records`
+  String get noGameRecords {
+    return Intl.message(
+      'No Play records',
+      name: 'noGameRecords',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset`
+  String get Reset {
+    return Intl.message(
+      'Reset',
+      name: 'Reset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game No: `
+  String get gameNo {
+    return Intl.message(
+      'Game No: ',
+      name: 'gameNo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Result`
+  String get result {
+    return Intl.message(
+      'Result',
+      name: 'result',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `date: `
+  String get date {
+    return Intl.message(
+      'date: ',
+      name: 'date',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

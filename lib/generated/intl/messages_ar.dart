@@ -24,12 +24,18 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Arabic": MessageLookupByLibrary.simpleMessage("العربية"),
         "English": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
+        "Reset": MessageLookupByLibrary.simpleMessage("إعادة تهيئة"),
         "Settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "appTheme": MessageLookupByLibrary.simpleMessage("نمط التطبيق"),
+        "date": MessageLookupByLibrary.simpleMessage("التاريخ: "),
+        "gameNo": MessageLookupByLibrary.simpleMessage("تسلسل اللعبة: "),
         "help": MessageLookupByLibrary.simpleMessage("مساعدة ؟"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "logOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+        "noGameRecords":
+            MessageLookupByLibrary.simpleMessage("لا يوجد سجل للعب"),
         "playHistory": MessageLookupByLibrary.simpleMessage("تاريخ اللعب"),
+        "result": MessageLookupByLibrary.simpleMessage("النتيجة "),
         "startPaly": MessageLookupByLibrary.simpleMessage("أبدأ اللعب")
       };
 }

@@ -33,7 +33,7 @@ class _PlayerCardState extends State<PlayerCard>
     super.initState();
 
     _controller = AnimationController(
-      duration: Duration(seconds: 1),
+      duration: Duration(seconds: 3),
       vsync: this,
     );
     _animation = widget.tweenOffset.animate(_controller);
@@ -69,9 +69,12 @@ class _PlayerCardState extends State<PlayerCard>
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
+        Container(
+          color: Colors.white,
           height: MediaQuery.of(context).size.height * 0.15,
-          child: Image.asset(widget.imageAsset),
+          child: Image.asset(
+            widget.imageAsset,
+          ),
         ),
         Text(
           widget.cardName,
@@ -85,7 +88,7 @@ class _PlayerCardState extends State<PlayerCard>
     if (_controller.isCompleted) {
       _controller.reverse();
     } else {
-      _controller.forward();
+      _controller.animateTo(1.0, curve: Curves.bounceInOut);
     }
     invokeLogic();
   }

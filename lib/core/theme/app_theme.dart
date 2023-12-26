@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:stone_game/core/theme/text.theme.dart';
 
 final kLightColorScheme =
-    ColorScheme.fromSeed(seedColor: const Color(0xff00C8C8));
+    ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 3, 45, 45));
 final kDarkColorScheme = ColorScheme.fromSeed(
-    seedColor: const Color(0xff18604A), brightness: Brightness.dark);
+    seedColor: Color.fromARGB(255, 1, 66, 47), brightness: Brightness.dark);
 
 class AppThemes {
 // 1
@@ -59,11 +59,15 @@ class AppThemes {
 
 // 4
   static ThemeData darkAppTheme = ThemeData(
+    drawerTheme: DrawerThemeData(
+      backgroundColor: Colors.black,
+    ),
     brightness: Brightness.dark,
     scaffoldBackgroundColor: kDarkColorScheme.shadow,
     appBarTheme: AppBarTheme(
-      backgroundColor: kDarkColorScheme.primary,
-      foregroundColor: kDarkColorScheme.onSecondary,
+      iconTheme: IconThemeData(color: Colors.white),
+      backgroundColor: kDarkColorScheme.primaryContainer,
+      foregroundColor: kDarkColorScheme.onPrimaryContainer,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: kDarkColorScheme.secondary,
@@ -79,6 +83,7 @@ class AppThemes {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
           minimumSize: const Size(130, 70)),
     ),
+    cardTheme: CardTheme(color: kDarkColorScheme.primaryContainer),
     textTheme: AppTextThemes.darkTextTheme,
   );
 }

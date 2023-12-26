@@ -1,7 +1,7 @@
 import 'dart:math';
 
 final List<String> gameChoices = ['Sissor', 'Paper', 'Rock'];
-final List<String> resultsOptions = ['draw', 'computer wins', 'player wins'];
+final List<String> resultsOptions = ['Draw', 'computer WON', 'You WON'];
 
 abstract class GameLogicAPI {
   Future<String> randomComputerChoice(List<String> computerChoices);

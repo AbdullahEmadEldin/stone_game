@@ -24,12 +24,18 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
         "English": MessageLookupByLibrary.simpleMessage("English"),
+        "Reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "Settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "appTheme": MessageLookupByLibrary.simpleMessage("App Theme"),
+        "date": MessageLookupByLibrary.simpleMessage("date: "),
+        "gameNo": MessageLookupByLibrary.simpleMessage("Game No: "),
         "help": MessageLookupByLibrary.simpleMessage("Help"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
+        "noGameRecords":
+            MessageLookupByLibrary.simpleMessage("No Play records"),
         "playHistory": MessageLookupByLibrary.simpleMessage("Play History"),
+        "result": MessageLookupByLibrary.simpleMessage("Result"),
         "startPaly": MessageLookupByLibrary.simpleMessage("Start play")
       };
 }

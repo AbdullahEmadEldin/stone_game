@@ -37,7 +37,7 @@ class AppTextThemes {
       fontFamily: 'Cairo-VariableFont_slnt,wght',
       fontSize: 20.0,
       fontWeight: FontWeight.w600,
-      color: kLightColorScheme.onPrimaryContainer,
+      color: kLightColorScheme.onPrimary,
     ),
   );
 // 2
@@ -46,13 +46,13 @@ class AppTextThemes {
       fontFamily: 'Cairo-VariableFont_slnt,wght',
       fontSize: 14.0,
       fontWeight: FontWeight.w700,
-      color: kDarkColorScheme.onPrimary,
+      color: kDarkColorScheme.onPrimaryContainer,
     ),
     displayLarge: TextStyle(
       fontFamily: 'Cairo-VariableFont_slnt,wght',
       fontSize: 32.0,
       fontWeight: FontWeight.bold,
-      color: kDarkColorScheme.onPrimary,
+      color: kDarkColorScheme.onPrimaryContainer,
     ),
     displayMedium: const TextStyle(
       fontFamily: 'Cairo-VariableFont_slnt,wght',
@@ -70,7 +70,7 @@ class AppTextThemes {
       fontFamily: 'Cairo-VariableFont_slnt,wght',
       fontSize: 20.0,
       fontWeight: FontWeight.w600,
-      color: kDarkColorScheme.onPrimary,
+      color: kDarkColorScheme.onPrimaryContainer,
     ),
   );
 }
